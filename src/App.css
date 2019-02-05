@@ -10,15 +10,9 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
 .grid-wrapper {
   display: flex;
   flex-wrap: wrap;
-  /* background-color: lightgray; */
   height: 50vmin;
   width: 50vmin;
   border-radius: 20px;
@@ -26,24 +20,36 @@
 }
 
 .tile-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
   height: calc(25% - 2px);
   width: calc(25% - 2px);
   border-radius: 10px;
   border: 1px solid white;
+  transition: transform .5s ease-in-out;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.tile-back, .tile-front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 9px;
+}
+
+.tile-back img {
+  height: 50%;
+  width: 50%;
 }
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
