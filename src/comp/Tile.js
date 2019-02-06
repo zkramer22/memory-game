@@ -4,11 +4,14 @@ import React, { Component } from 'react';
 class Tile extends Component {
   constructor(props) {
     super(props);
-    this.state = { flipped: false };
-    this.flipCard = this.flipCard.bind(this);
+    this.state = {
+      flipped: false,
+      matched: false
+    };
+    this.flipTile = this.flipTile.bind(this);
   }
 
-  flipCard(e) {
+  flipTile() {
     if (!this.state.flipped) {
       this.setState({ flipped: true });
     }
@@ -19,16 +22,19 @@ class Tile extends Component {
   }
 
   render() {
-    const { color, word } = this.props;
-    const flipClass = this.state.flipped ? 'tile-wrapper flipped' : 'tile-wrapper';
+    const { word, delay } = this.props;
+    const flipStyle = this.state.flipped ? 'tile-wrapper flipped' : 'tile-wrapper';
+    const matchStyle = this.state.matched ? 'tile-front flipped matched' : 'tile-front flipped';
 
     return (
-      <div onClick={ this.flipCard } className={ flipClass }>
-        <div className="tile-back" style={{ backgroundColor: color }}>
-          <img src={ back } alt="card"/>
-        </div>
-        <div className="tile-front flipped">
-          <p>{ word }</p>
+      <div className="tile-animation-wrapper pre-animate" style={{ transitionDelay: `${delay}s, ${delay}s` }}>
+        <div className={ flipStyle } onClick={ this.flipTile } >
+          <div className="tile-back">
+            <img src={ back } alt="card"/>
+          </div>
+          <div className={ matchStyle }>
+            <p>{ word }</p>
+          </div>
         </div>
       </div>
     );

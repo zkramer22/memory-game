@@ -1,21 +1,21 @@
 export const TILES = [
-  { color: 'green', word: 'brother' },
-  { color: 'blue', word: 'ocean' },
-  { color: 'purple', word: 'eggplant' },
-  { color: 'red', word: 'apple' },
-  { color: 'steelblue', word: 'fur' },
-  { color: 'teal', word: 'bop' },
-  { color: 'peru', word: 'fourth' },
-  { color: 'orange', word: 'twigs' },
-  // --------------------------------
-  { color: 'maroon', word: 'brother' },
-  { color: 'darkkhaki', word: 'ocean' },
-  { color: 'aqua', word: 'eggplant' },
-  { color: 'lightpink', word: 'apple' },
-  { color: 'lightgreen', word: 'fur' },
-  { color: 'lightblue', word: 'bop' },
-  { color: 'gold', word: 'fourth' },
-  { color: 'darkgray', word: 'twigs' },
+  { word: 'brother' },
+  { word: 'ocean' },
+  { word: 'eggplant' },
+  { word: 'apple' },
+  { word: 'fur' },
+  { word: 'bop' },
+  { word: 'fourth' },
+  { word: 'twigs' },
+// -------------------- //
+  { word: 'brother' },
+  { word: 'ocean' },
+  { word: 'eggplant' },
+  { word: 'apple' },
+  { word: 'fur' },
+  { word: 'bop' },
+  { word: 'fourth' },
+  { word: 'twigs' },
 ];
 
 export const shuffler = arr => {
