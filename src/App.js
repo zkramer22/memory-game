@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Grid from './comp/Grid.js';
+import GameOver from './comp/GameOver.js';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +16,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.showTiles(true), 1000);
+    setTimeout(() => {
+      this.showTiles(true);
+      this.showContent(true);
+    }, 1000);
   }
 
   updateMatches(num) {
@@ -23,8 +27,9 @@ class App extends Component {
       const matches = document.getElementById('matches');
       this.flashColor(matches, 'green');
       this.setState({ matches: this.state.matches + 1 });
-      if (this.state.matches === 8) {
+      if (this.state.matches === 3) {
         this.showTiles(false);
+        this.showContent(false);
         setTimeout(() => this.setState({ gameOver: true }), 1500);
       }
     }
@@ -49,9 +54,9 @@ class App extends Component {
     setTimeout(() => el.classList.remove(color), 500);
   }
 
-  showTiles(showBool) {
+  showTiles(bool) {
     const tiles = document.querySelectorAll('.tile-animation-wrapper');
-    if (showBool) {
+    if (bool) {
       tiles.forEach(tile => tile.classList.remove('pre-animate'));
     }
     else {
@@ -59,49 +64,52 @@ class App extends Component {
     }
   }
 
-  render() {
-    if (!this.state.gameOver) {
-      return (
-        <div className="App">
-        <header>
-        <h1>memory game</h1>
-        </header>
-        <Grid updateMatches={ this.updateMatches } updateMisses={ this.updateMisses }/>
-        <footer>
-          <h2 id="matches">matches: { this.state.matches }</h2>
-          <h3 id="misses">misses: { this.state.misses }</h3>
-        </footer>
+  showContent(bool) {
+    const header = document.querySelector('#header-title'),
+          footers = document.querySelectorAll('.footer');
 
-        {/* below is the credit tag for the icons. whatev */}
-        <div style={{ display: 'none' }}>
-        Icons made by
-        <a href="https://www.freepik.com/" title="Freepik">
-        Freepik
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-        www.flaticon.com
-        </a>
-        is licensed by
-        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" rel="noopener noreferrer">
-        CC 3.0 BY
-        </a>
-        </div>
-        </div>
-      );
+    if (bool) {
+      header.classList.remove('pre-animate');
+      footers.forEach(el => el.classList.remove('pre-animate'));
     }
     else {
-      return (
-        <div className="App">
+      header.classList.add('pre-animate');
+      footers.forEach(el => el.classList.add('pre-animate'));
+    }
+  }
+
+  render() {
+    let appContent = null;
+    if (!this.state.gameOver) {
+      appContent = (
+        <div>
           <header>
-            <h1>u win</h1>
+          <h1 id="header-title" className="pre-animate">memory game</h1>
           </header>
+
+          <Grid updateMatches={ this.updateMatches } updateMisses={ this.updateMisses }/>
+
           <footer>
-            <h2>final score: { this.state.matches - this.state.misses }</h2>
+          <h2 id="matches" className="footer pre-animate">matches: { this.state.matches }</h2>
+          <h3 id="misses" className="footer pre-animate">misses: { this.state.misses }</h3>
           </footer>
         </div>
       );
     }
+    else {
+      appContent = (
+        <div>
+          <GameOver matches={ this.state.matches } misses={ this.state.misses }/>
+        </div>
+      );
+    }
+
+    return (
+      <div className="App">
+        { appContent }
+      </div>
+    );
+
   }
 }
 

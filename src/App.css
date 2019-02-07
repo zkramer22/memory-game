@@ -12,41 +12,27 @@
   overflow: hidden;
 }
 
-@keyframes flyin-top {
-  from { top: -100vh }
-  to { top: 0px }
-}
-
-@keyframes flyin-bottom {
-  from { bottom: -100vh }
-  to { bottom: 0px }
-}
-
 .App h1, .App h2, .App h3 {
   position: relative;
   width: 100%;
   transition-property: color, top, bottom;
-  transition-duration: .3s, 1s, 1s;
+  transition-duration: .3s, 1.5s, 1.5s;
   transition-timing-function: linear, ease, ease;
 }
 
-.App h1 {
-  animation: 2s ease flyin-top;
+#header-title, #gameover-title, #gameover-score {
+  top: 0px;
 }
 
-.App h2 {
-  animation: 2s ease flyin-bottom;
-}
-
-.App h3 {
-  animation: 2s ease flyin-bottom;
-}
-
-.flyout-top {
+#header-title.pre-animate, #gameover-title.pre-animate, #gameover-score.pre-animate {
   top: -100vh;
 }
 
-.flyout-bottom {
+.footer {
+  bottom: 0px;
+}
+
+.footer.pre-animate {
   bottom: -100vh;
 }
 
@@ -79,7 +65,7 @@
   margin: 5px;
 }
 
-.pre-animate {
+.tile-animation-wrapper.pre-animate {
   opacity: 0;
   top: 15px;
   pointer-events: none;
