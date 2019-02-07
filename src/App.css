@@ -12,12 +12,12 @@
   overflow: hidden;
 }
 
-@keyframes fly-in-top {
+@keyframes flyin-top {
   from { top: -100vh }
   to { top: 0px }
 }
 
-@keyframes fly-in-bottom {
+@keyframes flyin-bottom {
   from { bottom: -100vh }
   to { bottom: 0px }
 }
@@ -25,19 +25,29 @@
 .App h1, .App h2, .App h3 {
   position: relative;
   width: 100%;
-  transition: color .3s linear;
+  transition-property: color, top, bottom;
+  transition-duration: .3s, 1s, 1s;
+  transition-timing-function: linear, ease, ease;
 }
 
 .App h1 {
-  animation: 2s ease fly-in-top;
+  animation: 2s ease flyin-top;
 }
 
 .App h2 {
-  animation: 2s ease fly-in-bottom;
+  animation: 2s ease flyin-bottom;
 }
 
 .App h3 {
-  animation: 2s ease fly-in-bottom;
+  animation: 2s ease flyin-bottom;
+}
+
+.flyout-top {
+  top: -100vh;
+}
+
+.flyout-bottom {
+  bottom: -100vh;
 }
 
 .red {

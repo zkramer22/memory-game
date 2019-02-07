@@ -6,15 +6,29 @@ class Grid extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tiles: shuffler(TILES),
+      // tiles: shuffler(TILES),
+      tiles: TILES,
       comparing: false,
       tileCheck: []
     };
     this.compareCards = this.compareCards.bind(this);
   }
 
+  handleMatch(tile1, tile2) {
+    tile1.setState({ matched: true });
+    tile2.setState({ matched: true });
+    this.props.updateMatches(1);
+    document.body.style.pointerEvents = 'initial';
+  }
+
+  handleMiss(tileCheck) {
+    tileCheck.forEach(tile => tile.setState({ flipped: false }));
+    this.setState({ tileCheck: [] });
+    this.props.updateMisses(1);
+    document.body.style.pointerEvents = 'initial';
+  }
+
   compareCards(tile) {
-    // copy of state tileCheck. arr items are Tiles
     const tileCheck = this.state.tileCheck;
     tileCheck.push(tile);
 
@@ -24,24 +38,14 @@ class Grid extends Component {
 
       if (tile1.props.word === tile2.props.word) {
         // it's a match!
-        setTimeout(() => {
-          tile1.setState({ matched: true });
-          tile2.setState({ matched: true });
-          this.props.updateMatches(1);
-        }, 1000)
+        document.body.style.pointerEvents = 'none';
+        setTimeout(() => this.handleMatch(tile1, tile2), 1000);
         this.setState({ tileCheck: [] });
       }
       else {
-        // not a match.
+        // it's a miss.
         document.body.style.pointerEvents = 'none';
-        setTimeout(() => {
-          tileCheck.forEach((tile) => {
-            tile.setState({ flipped: false })
-          });
-          this.setState({ tileCheck: [] });
-          this.props.updateMisses(1);
-          document.body.style.pointerEvents = 'initial';
-        }, 1000);
+        setTimeout(() => this.handleMiss(tileCheck), 1000);
       }
     }
   }
