@@ -6,8 +6,8 @@ class Grid extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // tiles: shuffler(TILES),
-      tiles: TILES,
+      tiles: shuffler(TILES),
+      // tiles: TILES,
       comparing: false,
       tileCheck: []
     };
