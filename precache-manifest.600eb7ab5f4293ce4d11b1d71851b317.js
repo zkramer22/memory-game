@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/navicor-memory-game/static/js/runtime~main.90a883c0.js"
   },
   {
-    "revision": "15522a6c499177671588",
-    "url": "/navicor-memory-game/static/js/main.15522a6c.chunk.js"
+    "revision": "2519d6b66c7757f9e7fa",
+    "url": "/navicor-memory-game/static/js/main.2519d6b6.chunk.js"
   },
   {
     "revision": "ed88d9409e2279918096",
     "url": "/navicor-memory-game/static/js/1.ed88d940.chunk.js"
   },
   {
-    "revision": "15522a6c499177671588",
+    "revision": "2519d6b66c7757f9e7fa",
     "url": "/navicor-memory-game/static/css/main.4421fed6.chunk.css"
   },
   {
-    "revision": "525cfc08317aa90058d72d46ac2ff305",
+    "revision": "6741694164daf280ca4a4d58c8fa4251",
     "url": "/navicor-memory-game/index.html"
   }
 ];
