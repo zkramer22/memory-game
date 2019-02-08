@@ -1,35 +1,44 @@
 import React, { Component } from 'react';
+import { SCORES, insertAndSort } from '../data/ScoreData.js';
 
 class GameOver extends Component {
   componentDidMount() {
     setTimeout(() => {
-      this.showContent(true);
-    }, 0);
+      this.showGameOver(true);
+    }, 100);
   }
 
-  showContent(bool) {
-    const title = document.getElementById('gameover-title'),
-          score = document.getElementById('gameover-score');
+  showGameOver(bool) {
+    const headers = document.querySelectorAll('.header.pre-animate'),
+          footers = document.querySelectorAll('.footer.pre-animate');
 
     if (bool) {
-      title.classList.remove('pre-animate');
-      score.classList.remove('pre-animate');
+      headers.forEach(head => head.classList.remove('pre-animate'));
+      footers.forEach(foot => foot.classList.remove('pre-animate'));
     }
   }
 
   render() {
+    const entry = { name: 'ZTK', score: this.props.score };
+    const scoreArray = insertAndSort(SCORES, entry);
+    console.log(scoreArray);
     return (
       <div>
         <header>
-          <h1 id="gameover-title" className="pre-animate">
-            u win
-          </h1>
+          <h1 className="header pre-animate">:: hall of fame ::</h1>
+          { scoreArray.map((entry, i) => {
+            return (
+              <h4 key={ i } className="header pre-animate">{ entry.name } :: { entry.score}</h4>
+            )
+          }) }
         </header>
 
         <footer>
-          <h2 id="gameover-score" className="pre-animate">
-            final score: { this.props.matches - this.props.misses }
+          <h2 className="footer pre-animate">
+            final score: { this.props.score }
           </h2>
+
+          <h3 id="reload" className="footer pre-animate" onClick={ () => window.location.reload() }>start over!</h3>
         </footer>
       </div>
     );

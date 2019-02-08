@@ -15,13 +15,13 @@ export const TILES = [
   { word: 'fourth' },
   { word: 'twigs' },
   { word: 'twigs' },
-  // { word: 'genius' },
+  // { word: 'sorry' },
+  // { word: 'sorry' },
   // { word: 'silly' },
-  // { word: 'before' },
+  // { word: 'silly' },
+  // { word: 'after' },
+  // { word: 'after' },
   // { word: 'lucky' },
-  // { word: 'genius' },
-  // { word: 'silly' },
-  // { word: 'before' },
   // { word: 'lucky' },
 ];
 

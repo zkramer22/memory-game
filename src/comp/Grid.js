@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tile from './Tile.js';
-import { TILES, shuffler } from '../TileData.js';
+import { TILES, shuffler } from '../data/TileData.js';
 
 class Grid extends Component {
   constructor(props) {

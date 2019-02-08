@@ -7,9 +7,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      score: 0,
       matches: 0,
       misses: 0,
-      gameOver: false
+      gameOver: false,
+      timer: 10,
+      countdown: null
     };
     this.updateMatches = this.updateMatches.bind(this);
     this.updateMisses = this.updateMisses.bind(this);
@@ -19,18 +22,39 @@ class App extends Component {
     setTimeout(() => {
       this.showTiles(true);
       this.showContent(true);
-    }, 1000);
+    }, 500);
+    setTimeout(() => this.countDown(), 2000);
+  }
+
+  restartTimer() {
+    this.stopTimer();
+    this.setState({ timer: 10 });
+    this.countDown();
+  }
+
+  tickTimer() {
+    if (this.state.timer > 1) {
+      this.setState({ timer: this.state.timer - 1 });
+    }
+  }
+
+  countDown() {
+    this.setState({ countdown: setInterval(() => this.tickTimer(), 1000) });
+  }
+
+  stopTimer() {
+    clearInterval(this.state.countdown);
   }
 
   updateMatches(num) {
     if (num === 1) {
-      const matches = document.getElementById('matches');
-      this.flashColor(matches, 'green');
-      this.setState({ matches: this.state.matches + 1 });
-      if (this.state.matches === 3) {
-        this.showTiles(false);
-        this.showContent(false);
-        setTimeout(() => this.setState({ gameOver: true }), 1500);
+      const score = document.getElementById('score');
+      this.flashColor(score, 'green');
+      this.setState({ matches: this.state.matches + 1, score: this.state.score + (100 * this.state.timer) });
+      this.restartTimer();
+      if (this.state.matches === 2) {
+        this.endGame();
+        this.stopTimer();
       }
     }
     else {
@@ -40,9 +64,11 @@ class App extends Component {
 
   updateMisses(num) {
     if (num === 1) {
-      const misses = document.getElementById('misses');
-      this.flashColor(misses, 'red');
-      this.setState({ misses: this.state.misses + 1 });
+      const score = document.getElementById('score');
+      this.flashColor(score, 'red');
+      this.setState({ misses: this.state.misses + 1, score: this.state.score - (50 * (this.state.misses + .5)) });
+      this.stopTimer();
+      this.countDown();
     }
     else {
       this.setState({ misses: 0 });
@@ -65,17 +91,23 @@ class App extends Component {
   }
 
   showContent(bool) {
-    const header = document.querySelector('#header-title'),
+    const headers = document.querySelectorAll('.header'),
           footers = document.querySelectorAll('.footer');
 
     if (bool) {
-      header.classList.remove('pre-animate');
-      footers.forEach(el => el.classList.remove('pre-animate'));
+      headers.forEach(head => head.classList.remove('pre-animate'));
+      footers.forEach(foot => foot.classList.remove('pre-animate'));
     }
     else {
-      header.classList.add('pre-animate');
-      footers.forEach(el => el.classList.add('pre-animate'));
+      headers.forEach(head => head.classList.add('pre-animate'));
+      footers.forEach(foot => foot.classList.add('pre-animate'));
     }
+  }
+
+  endGame() {
+    this.showTiles(false);
+    this.showContent(false);
+    setTimeout(() => this.setState({ gameOver: true }), 1500);
   }
 
   render() {
@@ -84,14 +116,20 @@ class App extends Component {
       appContent = (
         <div>
           <header>
-          <h1 id="header-title" className="pre-animate">memory game</h1>
+            <h1 className="header pre-animate">memory game</h1>
           </header>
 
           <Grid updateMatches={ this.updateMatches } updateMisses={ this.updateMisses }/>
 
           <footer>
-          <h2 id="matches" className="footer pre-animate">matches: { this.state.matches }</h2>
-          <h3 id="misses" className="footer pre-animate">misses: { this.state.misses }</h3>
+            <h2 id="score" className="footer pre-animate">score: { this.state.score }</h2>
+            <div id="match-miss">
+            {/*
+              <h4 id="matches" className="footer pre-animate">matches: { this.state.matches }</h4>
+              <h4 id="misses" className="footer pre-animate">misses: { this.state.misses }</h4>
+            */}
+              <h4 className="footer pre-animate">multipler: { this.state.timer }</h4>
+            </div>
           </footer>
         </div>
       );
@@ -99,7 +137,7 @@ class App extends Component {
     else {
       appContent = (
         <div>
-          <GameOver matches={ this.state.matches } misses={ this.state.misses }/>
+          <GameOver matches={ this.state.matches } misses={ this.state.misses } score={ this.state.score }/>
         </div>
       );
     }
