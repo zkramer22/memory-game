@@ -6,8 +6,8 @@ class Grid extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // tiles: shuffler(TILES),
-      tiles: TILES,
+      tiles: shuffler(TILES),
+      // tiles: TILES,
       comparing: false,
       tileCheck: []
     };
@@ -17,14 +17,14 @@ class Grid extends Component {
   handleMatch(tile1, tile2) {
     tile1.setState({ matched: true });
     tile2.setState({ matched: true });
-    this.props.updateMatches(1);
+    this.props.updateMatches();
     document.body.style.pointerEvents = 'initial';
   }
 
   handleMiss(tileCheck) {
     tileCheck.forEach(tile => tile.setState({ flipped: false }));
     this.setState({ tileCheck: [] });
-    this.props.updateMisses(1);
+    this.props.updateMisses();
     document.body.style.pointerEvents = 'initial';
   }
 

@@ -14,7 +14,7 @@
 
 .App h1, .App h2, .App h3, .App h4 {
   position: relative;
-  width: 100%;
+  /* width: 100%; */
   transition-property: color, top, bottom;
   transition-duration: .3s, 1.5s, 1.5s;
   transition-timing-function: linear, ease, ease;
@@ -41,8 +41,8 @@ h4 {
 }
 
 #match-miss {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex; */
+  /* justify-content: space-between; */
 }
 
 #reload {
@@ -50,6 +50,7 @@ h4 {
   color: rgba(31, 198, 73, 1);
   padding: 10px;
   border: 1px solid;
+  cursor: pointer;
 }
 
 .red {
@@ -57,7 +58,7 @@ h4 {
 }
 
 .green {
-  color: rgba(31, 198, 73, 0.7);;
+  color: rgba(31, 198, 73, 0.7);
 }
 
 .grid-wrapper {

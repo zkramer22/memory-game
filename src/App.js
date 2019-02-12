@@ -46,33 +46,23 @@ class App extends Component {
     clearInterval(this.state.countdown);
   }
 
-  updateMatches(num) {
-    if (num === 1) {
-      const score = document.getElementById('score');
-      this.flashColor(score, 'green');
-      this.setState({ matches: this.state.matches + 1, score: this.state.score + (100 * this.state.timer) });
-      this.restartTimer();
-      if (this.state.matches === 2) {
-        this.endGame();
-        this.stopTimer();
-      }
-    }
-    else {
-      this.setState({ matches: 0 });
+  updateMatches() {
+    const score = document.getElementById('score');
+    this.flashColor(score, 'green');
+    this.setState({ matches: this.state.matches + 1, score: this.state.score + (100 * this.state.timer) });
+    this.restartTimer();
+    if (this.state.matches === 8) {
+      this.endGame();
+      this.stopTimer();
     }
   }
 
-  updateMisses(num) {
-    if (num === 1) {
-      const score = document.getElementById('score');
-      this.flashColor(score, 'red');
-      this.setState({ misses: this.state.misses + 1, score: this.state.score - (50 * (this.state.misses + .5)) });
-      this.stopTimer();
-      this.countDown();
-    }
-    else {
-      this.setState({ misses: 0 });
-    }
+  updateMisses() {
+    const score = document.getElementById('score');
+    this.flashColor(score, 'red');
+    this.setState({ misses: this.state.misses + 1, score: this.state.score - (50 * (this.state.misses + .5)) });
+    this.stopTimer();
+    this.countDown();
   }
 
   flashColor(el, color) {
@@ -136,9 +126,7 @@ class App extends Component {
     }
     else {
       appContent = (
-        <div>
           <GameOver matches={ this.state.matches } misses={ this.state.misses } score={ this.state.score }/>
-        </div>
       );
     }
 

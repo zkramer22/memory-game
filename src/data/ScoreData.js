@@ -1,13 +1,13 @@
 export const SCORES = [
-  { name: 'AKG', score: 9000 },
-  { name: 'ZZT', score: 7700 },
-  { name: 'OPO', score: 6750 },
-  { name: 'CLG', score: 5725 },
-  { name: 'LGD', score: 4000 },
-  { name: 'ACA', score: 3450 },
-  { name: 'BBB', score: 2325 },
-  { name: 'JER', score: 2050 },
-  { name: 'YUM', score: 1000 },
+  { name: 'AKG', score: 9000, player: false },
+  { name: 'ZZT', score: 7700, player: false },
+  { name: 'OPO', score: 6750, player: false },
+  { name: 'CLG', score: 5725, player: false },
+  { name: 'LGD', score: 4000, player: false },
+  { name: 'ACA', score: 3450, player: false },
+  { name: 'BBB', score: 2325, player: false },
+  { name: 'JER', score: 2050, player: false },
+  { name: 'YUM', score: 1000, player: false },
 ];
 
 export const insertAndSort = (arr, entry) => {

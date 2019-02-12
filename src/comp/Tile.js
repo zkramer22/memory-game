@@ -1,4 +1,4 @@
-import back from '../img/heart.svg';
+import tileBack from '../img/heart.svg';
 import React, { Component } from 'react';
 
 class Tile extends Component {
@@ -30,7 +30,7 @@ class Tile extends Component {
       <div className="tile-animation-wrapper pre-animate" style={{ transitionDelay: `${delay}s, ${delay}s` }}>
         <div className={ flipStyle } onClick={ this.flipTile } >
           <div className="tile-back">
-            <img src={ back } alt="card" draggable="false"/>
+            <img src={ tileBack } alt="tile" draggable="false"/>
           </div>
           <div className={ matchStyle }>
             <p>{ word }</p>

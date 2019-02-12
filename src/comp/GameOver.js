@@ -19,17 +19,23 @@ class GameOver extends Component {
   }
 
   render() {
-    const entry = { name: 'ZTK', score: this.props.score };
+    const entry = { name: 'ZTK', score: this.props.score, player: true };
     const scoreArray = insertAndSort(SCORES, entry);
-    console.log(scoreArray);
     return (
       <div>
         <header>
           <h1 className="header pre-animate">:: hall of fame ::</h1>
           { scoreArray.map((entry, i) => {
-            return (
-              <h4 key={ i } className="header pre-animate">{ entry.name } :: { entry.score}</h4>
-            )
+            if (!entry.player) {
+              return (
+                <h4 key={ i } className="header pre-animate">{ entry.name } :: { entry.score}</h4>
+              )
+            }
+            else {
+              return (
+                <h4 key={ i } className="header pre-animate green">{ entry.name } :: { entry.score}</h4>
+              )
+            }
           }) }
         </header>
 
