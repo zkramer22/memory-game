@@ -11,22 +11,15 @@ export const SCORES = [
 ];
 
 export const insertAndSort = (arr, entry) => {
-  for (var i = arr.length - 1; i > 0; i--) {
-    var j = i - 1,
-        score1 = arr[i].score,
-        score2 = arr[j].score;
-    if (entry.score > score1) {
-      if (entry.score < score2) {
-        arr.splice(i, 0, entry);
-        return arr;
-      }
-      else {
-        continue;
-      }
-    }
-    else {
-      arr.push(entry);
+  var entryScore = entry.score;
+  for (var i = 0, len = arr.length; i < len; i++) {
+    var score1 = arr[i].score;
+
+    if (entryScore > score1) {
+      arr.splice(i, 0, entry);
       return arr;
     }
   }
-}
+  arr.push(entry);
+  return arr;
+};
