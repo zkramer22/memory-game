@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tile from './Tile.js';
 import { TILES, shuffler } from '../data/TileData.js';
+import { DEFS } from '../data/DefData.js';
 
 class Grid extends Component {
   constructor(props) {
@@ -8,16 +9,17 @@ class Grid extends Component {
     this.state = {
       tiles: shuffler(TILES),
       // tiles: TILES,
-      comparing: false,
       tileCheck: []
     };
-    this.compareCards = this.compareCards.bind(this);
+    this.compareTiles = this.compareTiles.bind(this);
   }
 
   handleMatch(tile1, tile2) {
     tile1.setState({ matched: true });
     tile2.setState({ matched: true });
+    const defObj = DEFS[tile1.props.id];
     this.props.updateMatches();
+    this.props.updateDefs(defObj);
     document.body.style.pointerEvents = 'initial';
   }
 
@@ -28,7 +30,7 @@ class Grid extends Component {
     document.body.style.pointerEvents = 'initial';
   }
 
-  compareCards(tile) {
+  compareTiles(tile) {
     const tileCheck = this.state.tileCheck;
     tileCheck.push(tile);
 
@@ -36,7 +38,7 @@ class Grid extends Component {
       const tile1 = tileCheck[0],
             tile2 = tileCheck[1];
 
-      if (tile1.props.word === tile2.props.word) {
+      if (tile1.props.id === tile2.props.id) {
         // it's a match!
         document.body.style.pointerEvents = 'none';
         setTimeout(() => this.handleMatch(tile1, tile2), 1000);
@@ -55,8 +57,8 @@ class Grid extends Component {
       <div className="grid-wrapper">
         { this.state.tiles.map((tile, i) => {
           return (
-            <Tile key={ i } color={ tile.color } word={ tile.word }
-            compareCards={ this.compareCards } delay={ i * 0.07 } />
+            <Tile key={ i } color={ tile.color } word={ tile.word } id={ tile.id }
+            compareTiles={ this.compareTiles } delay={ i * 0.07 } />
           );
         }) }
       </div>

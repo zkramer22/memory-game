@@ -40,11 +40,6 @@ h4 {
   bottom: -100vh;
 }
 
-#match-miss {
-  /* display: flex; */
-  /* justify-content: space-between; */
-}
-
 #reload {
   background-color: white;
   color: rgba(31, 198, 73, 1);
@@ -61,11 +56,36 @@ h4 {
   color: rgba(31, 198, 73, 0.7);
 }
 
+.sidebar-wrapper {
+  position: absolute;
+  top: 25%;
+  left: 10px;
+  height: 50vh;
+  width: 23vw;
+  border: 1px solid;
+  padding: 10px;
+  text-align: left;
+  overflow-y: scroll;
+  transition: top 2s ease;
+}
+
+.sidebar-wrapper.pre-animate {
+  top: -100vh;
+}
+
+.sidebar-wrapper p {
+  font-size: calc(5px + 1.5vmin);
+}
+
+.definition-wrapper {
+
+}
+
 .grid-wrapper {
   display: flex;
   flex-wrap: wrap;
-  height: 50vmin;
-  width: 50vmin;
+  height: 45vmin;
+  width: 45vmin;
   border-radius: 20px;
   font-size: 2vmin;
 }

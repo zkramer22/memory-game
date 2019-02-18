@@ -18,7 +18,7 @@ class Tile extends Component {
     else {
       this.setState({ flipped: false });
     }
-    this.props.compareCards(this);
+    this.props.compareTiles(this);
   }
 
   render() {

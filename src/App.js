@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Grid from './comp/Grid.js';
+import Definition from './comp/Definition.js';
 import GameOver from './comp/GameOver.js';
 
 class App extends Component {
@@ -10,12 +11,14 @@ class App extends Component {
       score: 0,
       matches: 0,
       misses: 0,
-      gameOver: false,
+      defs: [],
       timer: 10,
-      countdown: null
+      countdown: null,
+      gameOver: false,
     };
     this.updateMatches = this.updateMatches.bind(this);
     this.updateMisses = this.updateMisses.bind(this);
+    this.updateDefs = this.updateDefs.bind(this);
   }
 
   componentDidMount() {
@@ -60,9 +63,14 @@ class App extends Component {
   updateMisses() {
     const score = document.getElementById('score');
     this.flashColor(score, 'red');
-    this.setState({ misses: this.state.misses + 1, score: this.state.score - (50 * (this.state.misses + .5)) });
+    this.setState({ misses: this.state.misses + 1, score: this.state.score - 50 });
     this.stopTimer();
     this.countDown();
+  }
+
+  updateDefs(defObj) {
+    const { defs } = this.state;
+    defs.unshift(defObj);
   }
 
   flashColor(el, color) {
@@ -82,15 +90,18 @@ class App extends Component {
 
   showContent(bool) {
     const headers = document.querySelectorAll('.header'),
-          footers = document.querySelectorAll('.footer');
+          footers = document.querySelectorAll('.footer'),
+          sidebar = document.querySelector('.sidebar-wrapper');
 
     if (bool) {
       headers.forEach(head => head.classList.remove('pre-animate'));
       footers.forEach(foot => foot.classList.remove('pre-animate'));
+      sidebar.classList.remove('pre-animate');
     }
     else {
       headers.forEach(head => head.classList.add('pre-animate'));
       footers.forEach(foot => foot.classList.add('pre-animate'));
+      sidebar.classList.add('pre-animate');
     }
   }
 
@@ -102,36 +113,49 @@ class App extends Component {
 
   render() {
     let appContent = null;
+    const { defs } = this.state;
+
     if (!this.state.gameOver) {
       appContent = (
-        <div>
+        <div className="App">
           <header>
             <h1 className="header pre-animate">memory game</h1>
           </header>
 
-          <Grid updateMatches={ this.updateMatches } updateMisses={ this.updateMisses }/>
+          <div className="sidebar-wrapper pre-animate">
+            { defs.map((def, i) => {
+                return (
+                  <Definition key={ i } word={ def.word } def={ def.def }/>
+                );
+              })
+            }
+          </div>
+
+          <Grid updateMatches={ this.updateMatches }
+                updateMisses={ this.updateMisses }
+                updateDefs={ this.updateDefs }/>
 
           <footer>
-            <h2 id="score" className="footer pre-animate">score: { this.state.score }</h2>
-            <div id="match-miss">
-            {/*
-              <h4 id="matches" className="footer pre-animate">matches: { this.state.matches }</h4>
-              <h4 id="misses" className="footer pre-animate">misses: { this.state.misses }</h4>
-            */}
-              <h4 className="footer pre-animate">multipler: { this.state.timer }</h4>
-            </div>
+            <h2 id="score" className="footer pre-animate">
+              score: { this.state.score }
+            </h2>
+            <h4 className="footer pre-animate">
+              multipler: { this.state.timer }
+            </h4>
           </footer>
         </div>
       );
     }
     else {
       appContent = (
+        <div className="App">
           <GameOver matches={ this.state.matches } misses={ this.state.misses } score={ this.state.score }/>
+        </div>
       );
     }
 
     return (
-      <div className="App">
+      <div>
         { appContent }
       </div>
     );
