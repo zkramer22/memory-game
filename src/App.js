@@ -124,12 +124,15 @@ class App extends Component {
           </header>
           {
             /*
-            
+
             */
           }
           <div className="middle-spacer">
 
             <div className="sidebar-wrapper pre-animate">
+            <div className="sidebar-title">
+              <h4>definitions</h4>
+            </div>
             { defs.map((def, i) => {
                 return (
                   <Definition key={ i } word={ def.word } def={ def.def }/>

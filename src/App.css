@@ -86,15 +86,19 @@ h4 {
   padding: 10px;
   text-align: left;
   overflow-y: scroll;
-  transition: top 2s ease;
+  transition: left 2s ease;
 }
 
 .sidebar-wrapper.pre-animate {
-  top: -100vh;
+  left: -100vw;
 }
 
 .sidebar-wrapper p {
   font-size: calc(5px + 1.5vmin);
+}
+
+.sidebar-wrapper h4 {
+  text-align: center;
 }
 
 .definition-wrapper {
