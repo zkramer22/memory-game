@@ -1,4 +1,4 @@
-import tileBack from '../img/heart.svg';
+import tileBack from '../img/diamond.png';
 import React, { Component } from 'react';
 
 class Tile extends Component {

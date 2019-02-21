@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './MediaQueries.css';
 import Grid from './comp/Grid.js';
 import Definition from './comp/Definition.js';
 import GameOver from './comp/GameOver.js';
@@ -121,19 +122,27 @@ class App extends Component {
           <header>
             <h1 className="header pre-animate">memory game</h1>
           </header>
+          {
+            /*
+            
+            */
+          }
+          <div className="middle-spacer">
 
-          <div className="sidebar-wrapper pre-animate">
+            <div className="sidebar-wrapper pre-animate">
             { defs.map((def, i) => {
                 return (
                   <Definition key={ i } word={ def.word } def={ def.def }/>
                 );
               })
             }
-          </div>
+            </div>
 
-          <Grid updateMatches={ this.updateMatches }
-                updateMisses={ this.updateMisses }
-                updateDefs={ this.updateDefs }/>
+            <Grid updateMatches={ this.updateMatches }
+                  updateMisses={ this.updateMisses }
+                  updateDefs={ this.updateDefs }/>
+
+          </div>
 
           <footer>
             <h2 id="score" className="footer pre-animate">
