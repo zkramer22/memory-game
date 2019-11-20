@@ -1,14 +1,14 @@
 {
-  "main.css": "/navicor-memory-game/static/css/main.69bfaa16.chunk.css",
-  "main.js": "/navicor-memory-game/static/js/main.e98c41f6.chunk.js",
-  "main.js.map": "/navicor-memory-game/static/js/main.e98c41f6.chunk.js.map",
-  "static/js/1.ed88d940.chunk.js": "/navicor-memory-game/static/js/1.ed88d940.chunk.js",
-  "static/js/1.ed88d940.chunk.js.map": "/navicor-memory-game/static/js/1.ed88d940.chunk.js.map",
+  "main.css": "/navicor-memory-game/static/css/main.18f6a64b.chunk.css",
+  "main.js": "/navicor-memory-game/static/js/main.fc3f57be.chunk.js",
+  "main.js.map": "/navicor-memory-game/static/js/main.fc3f57be.chunk.js.map",
+  "static/js/1.5fb161e1.chunk.js": "/navicor-memory-game/static/js/1.5fb161e1.chunk.js",
+  "static/js/1.5fb161e1.chunk.js.map": "/navicor-memory-game/static/js/1.5fb161e1.chunk.js.map",
   "runtime~main.js": "/navicor-memory-game/static/js/runtime~main.90a883c0.js",
   "runtime~main.js.map": "/navicor-memory-game/static/js/runtime~main.90a883c0.js.map",
   "static/media/diamond.png": "/navicor-memory-game/static/media/diamond.3a7b73f9.png",
-  "static/css/main.69bfaa16.chunk.css.map": "/navicor-memory-game/static/css/main.69bfaa16.chunk.css.map",
+  "static/css/main.18f6a64b.chunk.css.map": "/navicor-memory-game/static/css/main.18f6a64b.chunk.css.map",
   "index.html": "/navicor-memory-game/index.html",
-  "precache-manifest.db9220281a5780ef1d6311432c3eb4ed.js": "/navicor-memory-game/precache-manifest.db9220281a5780ef1d6311432c3eb4ed.js",
+  "precache-manifest.1f222ebbb29551ba0dfb5c2d6a7309ed.js": "/navicor-memory-game/precache-manifest.1f222ebbb29551ba0dfb5c2d6a7309ed.js",
   "service-worker.js": "/navicor-memory-game/service-worker.js"
 }
