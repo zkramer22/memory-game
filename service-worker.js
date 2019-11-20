@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/navicor-memory-game/precache-manifest.e442a7ecd75032e3a886aca760c9055f.js"
+  "/navicor-memory-game/precache-manifest.1f222ebbb29551ba0dfb5c2d6a7309ed.js"
 );
 
 workbox.clientsClaim();
