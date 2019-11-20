@@ -1,17 +1,12 @@
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
   .sidebar-wrapper {
-    display: none;
-  }
-
-  /* .sidebar-wrapper {
-    bottom: 10px;
-    right: 10px;
-    left: 10px;
-    max-width: unset;
-    height: 25%;
-    width: 90%;
+    bottom: 0;
+    height: 20vh;
+    width: 90vw;
+    left: 0;
+    right: 0;
     margin: 0 auto;
-  } */
+  }
 
   .grid-wrapper {
     height: 80vmin;
