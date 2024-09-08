@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TILES } from '../data/TileData.js';
 import { SCORES, insertAndSort } from '../data/ScoreData.js';
 
 class GameOver extends Component {
@@ -6,6 +7,22 @@ class GameOver extends Component {
     setTimeout(() => {
       this.showGameOver(true);
     }, 100);
+  }
+
+  updateDefs(defId) {
+    const { defs } = this.state;
+    // defs.unshift(TILES[defId]);
+    // this.setActiveDef(defId)
+  }
+
+  setActiveDef(defId) {
+    this.setState({
+      activeDef: TILES[defId]
+    });
+  }
+
+  defIsActive(defId) {
+    return this.state.activeDef.id === defId
   }
 
   showGameOver(bool) {
@@ -24,7 +41,7 @@ class GameOver extends Component {
     return (
       <div>
         <header>
-          <h1 className="header pre-animate">:: hall of fame ::</h1>
+          <h1 className="header pre-animate">:: high scores ::</h1>
           { scoreArray.map((entry, i) => {
             if (!entry.player) {
               return (

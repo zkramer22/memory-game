@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import Tile from './Tile.js';
-import { TILES, shuffler } from '../data/TileData.js';
-import { DEFS } from '../data/DefData.js';
+import coin from '../img/coin.png';
+import questionmarkwhite from '../img/questionmarkwhite.png';
 
 class Grid extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tiles: shuffler(TILES),
-      // tiles: TILES,
-      tileCheck: []
+      tileCheck: [],
     };
     this.compareTiles = this.compareTiles.bind(this);
   }
@@ -17,9 +15,10 @@ class Grid extends Component {
   handleMatch(tile1, tile2) {
     tile1.setState({ matched: true });
     tile2.setState({ matched: true });
-    const defObj = DEFS[tile1.props.id];
+    
+    // const defId = tile1.props.id;
     this.props.updateMatches();
-    this.props.updateDefs(defObj);
+    // this.props.updateDefs(defId);
     document.body.style.pointerEvents = 'initial';
   }
 
@@ -31,7 +30,7 @@ class Grid extends Component {
   }
 
   compareTiles(tile) {
-    const tileCheck = this.state.tileCheck;
+    const { tileCheck } = this.state;
     tileCheck.push(tile);
 
     if (tileCheck.length === 2) {
@@ -41,7 +40,7 @@ class Grid extends Component {
       if (tile1.props.id === tile2.props.id) {
         // it's a match!
         document.body.style.pointerEvents = 'none';
-        setTimeout(() => this.handleMatch(tile1, tile2), 1000);
+        setTimeout(() => this.handleMatch(tile1, tile2), 700);
         this.setState({ tileCheck: [] });
       }
       else {
@@ -53,12 +52,19 @@ class Grid extends Component {
   }
 
   render() {
+    const { tiles } = this.props
     return (
       <div className="grid-wrapper">
-        { this.state.tiles.map((tile, i) => {
+        { tiles.map((tile, i) => {
           return (
-            <Tile key={ i } color={ tile.color } word={ tile.word } id={ tile.id }
-            compareTiles={ this.compareTiles } delay={ i * 0.07 } />
+            <Tile key={ `tile-${i}` } 
+              id={ tile.id }
+              compareTiles={ this.compareTiles } 
+              delay={ i * 0.07 } 
+              tileBack={ questionmarkwhite }
+              tileImg={ tile.img }
+              coin={ coin }
+            />
           );
         }) }
       </div>
