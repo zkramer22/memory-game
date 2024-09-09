@@ -85,9 +85,17 @@
     margin: auto auto;
   }
 
-  .link-img-wrapper {
-    /* width: 75px; */
+  .link-img-wrapper  {
     width: clamp(40px, 7vh, 80px);
+  }
+  
+  #audio-controls {
+    padding: 10px;
+  }
+
+  #sound-on-off {
+    width: clamp(25px, 7vh, 50px);
+    height: auto;
   }
 
 }

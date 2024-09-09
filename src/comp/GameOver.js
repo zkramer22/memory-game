@@ -56,6 +56,23 @@ class GameOver extends Component {
           }) }
         </header>
 
+{/* <div className="defs-section">
+    { 
+      defs.map((def, i) => {
+        return (
+          <Definition key={ i }
+            name={ def.name } 
+            def={ def.def } 
+            type={ def.type }
+            img={ def.img }
+            // isActive={ this.defIsActive(def.id) }
+            onClick={ this.setActiveDef }
+          />
+        );
+      })
+    }
+  </div> */}
+
         <footer>
           <h2 className="footer pre-animate">
             final score: { this.props.score }

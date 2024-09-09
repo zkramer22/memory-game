@@ -20,6 +20,14 @@ body {
   user-select: none;
 }
 
+#root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-family: "Roboto-Mono", monospace;
+}
+
 img {
   display: block;
   width: 100%;
@@ -38,14 +46,6 @@ a {
 
 audio {
   display: none;
-}
-
-.App {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  color: white;
-  font-family: "Roboto-Mono", monospace;
 }
 
 .container {
@@ -74,14 +74,6 @@ header, .score-wrapper {
   font-weight: bold;
 }
 
-#score {
-  color: gold;
-}
-
-#multiplier {
-  color: lightgreen;
-}
-
 h1 {
   font-size: 24px;
 }
@@ -107,12 +99,27 @@ h1, #score-title {
   border-radius: 3px;
 }
 
-.red {
-  color: #D70028;
-}
-
 .green {
   color: rgba(31, 198, 73, 0.7);
+}
+
+
+.gold {
+  color: gold;
+}
+
+.lightgreen {
+  color: lightgreen;
+  filter: brightness(1.5);
+}
+
+.red {
+  color: #D70028;
+  filter: brightness(1.5);
+}
+
+.score-wrapper span {
+  transition: color .3s ease-out, filter .3s ease;
 }
 
 #start-wrapper, #startbutton {
@@ -161,15 +168,22 @@ h1, #score-title {
 }
 
 #audio-controls {
+  position: absolute;
+  right: 0;
+  top: 0;
   display: flex;
-  position: relative;
   align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+#sound-on-off {
+  width: 40px;
+  height: auto;
 }
 
 #audio-controls img {
-  width: 50px;
   height: auto;
-  /* position: absolute; */
 }
 
 .grid-section {
@@ -187,7 +201,7 @@ h1, #score-title {
   height: 100%;
   grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 5px;
+  grid-gap: 10px;
 }
 
 .tile-animation-wrapper {
@@ -214,6 +228,8 @@ h1, #score-title {
   cursor: pointer;
   transform-style: preserve-3d;
   transition: transform .5s ease-in-out;
+  box-shadow: 0px 0px 0px 3px #222222;
+  border-radius: 7px;
 }
 
 .tile-back, .tile-front {
@@ -224,9 +240,7 @@ h1, #score-title {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  transition: box-shadow .15s linear;
-  border-radius: 15px;
-  box-shadow: inset 0px 0px 0px 4px #222222;
+  border-radius: 7px;
 }
 
 .tile-back {
@@ -274,12 +288,11 @@ h1, #score-title {
 }
 
 .matched {
-  /* box-shadow: inset 0px 0px 0px 4px #73ff8c; */
   background-color: #282c34;
 }
 
 .matched .tile-img {
-  animation: 2.7s ease .5s rotateShrink forwards;
+  animation: 2.7s ease .2s rotateShrink forwards;
 }
 
 .tile-coin {
