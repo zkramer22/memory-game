@@ -70,4 +70,24 @@
   //   })
   //   this.state.song.play()
   // }
-  // ------------------------------------------------ //
+
+  // -------------------- html ---------------------------- //
+
+  {/* <div id="audio-controls">
+        <div id="prev">
+          <img onClick={ () => this.prevAudio() } className="audio-control" src={ prev } alt="prev"/>
+        </div>
+        <div id="play-pause">
+            <img style={{ display: pauseStyle }} onClick={ () => this.pauseAudio() } className="audio-control" src={ pause } alt="pause"/>
+            <img style={{ display: playStyle }} onClick={ () => this.playAudio() } className="audio-control" src={ play } alt="play"/>
+        </div>
+        <div id="next">
+          <img onClick={ () => this.nextAudio() } className="audio-control" src={ next } alt="next"/>
+        </div>
+        <div id="sound-on-off">
+            <img style={{ display: unmuteStyle }} onClick={ () => this.muteAudio(false) } className="audio-control" src={ soundoff } alt="soundoff"/>
+            <img style={{ display: muteStyle }} onClick={ () => this.muteAudio(true) } className="audio-control" src={ soundon } alt="soundon"/>
+        </div>
+      </div> */}
+
+      // -------------------------------------------------------- //

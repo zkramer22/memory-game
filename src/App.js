@@ -5,6 +5,7 @@ import Grid from './comp/Grid.js';
 import GameOver from './comp/GameOver.js';
 import { TILES, buildDeck } from './data/TileData.js';
 import coinsound from './audio/coin.mp3'
+import mario64castle from './audio/mario64castle.mp3';
 import ztk from './img/ztk.png';
 
 class App extends Component {
@@ -125,39 +126,22 @@ class App extends Component {
     let appContent = null;
     const { tileDeck } = this.state;
     const score = this.formatScore(this.state.score)
-    // const playStyle = this.state.playing ? 'none' : ''
-    // const pauseStyle = this.state.playing ? '' : 'none'
-    // const muteStyle = this.state.muted ? 'none' : ''
-    // const unmuteStyle = this.state.muted ? '' : 'none'
 
     if (!this.state.gameOver) {
       appContent = (
           <div className="container">
-            {/* <div id="start-wrapper">
-              <div id="startbutton">
-                <img src={ go } alt="go! p"/>
-              </div>
-            </div> */}
-            
+            <audio>
+              <source src={ mario64castle } type="audio/mpeg"/>
+            </audio>
             <header>
               <h1 className="header">superTileMatch</h1>
-              {/* <div id="audio-controls">
-                <div id="prev">
-                  <img onClick={ () => this.prevAudio() } className="audio-control" src={ prev } alt="prev"/>
-                </div>
-                <div id="play-pause">
-                    <img style={{ display: pauseStyle }} onClick={ () => this.pauseAudio() } className="audio-control" src={ pause } alt="pause"/>
-                    <img style={{ display: playStyle }} onClick={ () => this.playAudio() } className="audio-control" src={ play } alt="play"/>
-                </div>
-                <div id="next">
-                  <img onClick={ () => this.nextAudio() } className="audio-control" src={ next } alt="next"/>
-                </div>
-                <div id="sound-on-off">
-                    <img style={{ display: unmuteStyle }} onClick={ () => this.muteAudio(false) } className="audio-control" src={ soundoff } alt="soundoff"/>
-                    <img style={{ display: muteStyle }} onClick={ () => this.muteAudio(true) } className="audio-control" src={ soundon } alt="soundon"/>
-                </div>
-              </div> */}
             </header>
+
+            <div id="alt-header">
+              <div>super</div>
+              <div>Tile</div>
+              <div>Match</div>
+            </div>
 
             <div className="grid-section">
               <Grid 
@@ -168,24 +152,22 @@ class App extends Component {
               />
             </div>
 
-            <footer className="score-wrapper">
+            <div className="score-wrapper ratio-16-9-hide">
               <div>
-                <p id="score-title">
+                <h2 id="score-title">
                   score: <span id="score">{ score }</span>
-                </p>
+                </h2>
               </div>
               <div>
-                <p id="multiplier-title">
+                <h2 id="multiplier-title">
                   mult: <span id="multiplier">{ this.state.timer }x</span>
-                </p>
+                </h2>
               </div>
-            </footer>
+            </div>
 
-            <div id="links">
-
-
-              <a id="ztk-link" href="https://ztkweb.com" target="_blank" rel="noreferrer">
-                <div id="ztk">
+            <div className="links ratio-16-9-hide">
+              <a id="link" href="ztkweb.com" target="_blank" rel="noreferrer">
+                <div className="link-img-wrapper" id="ztk">
                   <img src={ztk} alt="ztk-logo"/>
                 </div>
                 <p>ztkweb.com</p>
