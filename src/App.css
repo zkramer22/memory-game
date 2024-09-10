@@ -37,6 +37,7 @@ img {
 
 h1, h2, p {
   margin: 0;
+  position: relative;
 }
 
 a {
@@ -46,6 +47,10 @@ a {
 
 audio {
   display: none;
+}
+
+.mb-5 {
+  margin-bottom: 2rem;
 }
 
 .container {
@@ -59,7 +64,19 @@ header, .score-wrapper {
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  animation: 1.75s fadein;
+  animation: 1.75s linear fadein;
+}
+
+.highscore {
+  animation: 1.75s linear fadein, 1.75s linear slidein-up;
+}
+
+.fadein {
+  animation: 1.75s linear fadein;
+}
+
+.slidein-up {
+  animation: 1.75s linear slidein-up;
 }
 
 #alt-header {
@@ -84,7 +101,7 @@ h2 {
 
 h1, #score-title {
   position: relative;
-  animation: 1.75s slidein-right;
+  animation: 1.75s slidein-right, 1.75s fadein;
 }
 
 #multiplier-title {
@@ -177,9 +194,20 @@ h1, #score-title {
   cursor: pointer;
 }
 
-#sound-on-off {
-  width: 40px;
+.no-sign {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  animation: .15s linear fadeinhalf forwards;
+}
+
+.audio-control-wrapper {
+  position: relative;
   height: auto;
+  width: 40px;
 }
 
 #audio-controls img {
@@ -193,6 +221,8 @@ h1, #score-title {
   max-width: calc(95vh - 12em);
   max-height: calc(95vh - 12em);
   margin: 0 auto;
+  text-align: center;
+  align-content: center;
 }
 
 .grid-wrapper {
@@ -410,6 +440,15 @@ h1, #score-title {
   }
 }
 
+@keyframes fadeinhalf {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: .5;
+  }
+}
+
 @keyframes slidein-left {
   0% {
     left: 20px;
@@ -427,6 +466,16 @@ h1, #score-title {
     right: 0;
   }
 }
+
+@keyframes slidein-up {
+  0% {
+    top: 20px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
 
 @keyframes bounce {
   0% {

@@ -1,4 +1,4 @@
-@media screen and (max-width: 500px) and (max-height: 500px) {
+@media screen and (max-width: 600px) and (max-height: 600px) {
   .grid-section {
     max-width: unset;
     max-height: unset;
@@ -93,7 +93,7 @@
     padding: 10px;
   }
 
-  #sound-on-off {
+  .audio-control-wrapper {
     width: clamp(25px, 7vh, 50px);
     height: auto;
   }

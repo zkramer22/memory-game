@@ -4,19 +4,24 @@ import './MediaQueries.css';
 import Grid from './comp/Grid.js';
 import GameOver from './comp/GameOver.js';
 import { TILES, buildDeck } from './data/TileData.js';
-import coinsound from './audio/coin.mp3'
+import coin from './audio/coin.mp3'
 import mariohoo from './audio/mariohoo.mp3'
+import bullet from './audio/bullet.mp3'
 import mario64castle from './audio/mario64castle.mp3';
 import ztk from './img/ztk.png';
-import soundoff from './img/soundoff.png';
+import musicon from './img/music.png';
+import nosign from './img/nosign.png';
 import soundon from './img/soundon.png';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      coinsound: new Audio(coinsound),
+      coin: new Audio(coin),
       mariohoo: new Audio(mariohoo),
+      bullet: new Audio(bullet),
+      music: true,
+      sfx: true,
       score: 0,
       matches: 0,
       misses: 0,
@@ -33,6 +38,10 @@ class App extends Component {
 
   componentDidMount() {
     setTimeout(() => this.showTiles(true), 500)
+    console.log('loadin');
+    this.state.coin.load()
+    this.state.mariohoo.load()
+    this.state.bullet.load()
   }
 
   restartTimer() {
@@ -54,26 +63,24 @@ class App extends Component {
 
   updateMatches() {
     const score = document.getElementById('score');
-    setTimeout(() => {
-      this.state.mariohoo.play()
-    }, 200)
+    this.playSound('mariohoo', 'sfx', 200)
     setTimeout(() => {
       this.flashColor(score, 'lightgreen');
       this.setState({ 
         matches: this.state.matches + 1, 
         score: this.state.score + (100 * this.state.timer) 
       });
-      if (this.state.muted) { return }
-      this.state.coinsound.play()
+      this.playSound('coin', 'sfx', 1)
       this.restartTimer();
+      if (this.state.matches === 8) {
+        this.endGame();
+        this.stopTimer();
+      }
     }, 2750)
-    if (this.state.matches === 8) {
-      this.endGame();
-      this.stopTimer();
-    }
   }
   updateMisses() {
     const score = document.getElementById('score');
+    this.playSound('bullet', 'sfx', 200)
     this.flashColor(score, 'red');
     this.setState({ 
       misses: this.state.misses + 1, 
@@ -101,12 +108,6 @@ class App extends Component {
     else tiles.forEach(tile => tile.classList.add('pre-animate'))
   }
 
-  showStartButton(bool) {
-    const start = document.querySelector('#start-wrapper')
-    if (bool) start.classList.add('active')
-    else start.classList.remove('active')
-  }
-
   playAudio() {
     const audio = document.getElementById('audio-player')
     document.getElementById('container').addEventListener('click', () => {
@@ -114,43 +115,47 @@ class App extends Component {
     }, { once: true })
   }
 
-  // scoreIndicator() {
-  //   setTimeout(() => this.setState({ scoreOpacity: '0' }), 1000);
-  //   setTimeout(() => this.setState({ scoreBottom: '30%' }), 1500);
-  // }
+  playSound(soundName, typeName, delay) {
+    const sound = this.state[soundName]
+    const type = this.state[typeName]
+    setTimeout(() => {
+      if (type) { sound.play() }
+    }, delay)
+  }
 
-  // updateScore(val) {
-  //   this.setState({
-  //     scoreOpacity: '1',
-  //     scoreBottom: '40%'
-  //   });
-  //   this.scoreIndicator();
-  // }
+  toggleAudio(typeName) {
+    const val = !this.state[typeName]
+    this.setState({
+      [`${typeName}`]: val
+    })
+  }
   
   endGame() {
-    setTimeout(() => this.showTiles(false), 3000);
-    setTimeout(() => this.setState({ gameOver: true }), 5000);
+    setTimeout(() => this.showTiles(false), 1500);
+    setTimeout(() => this.setState({ gameOver: true }), 3000);
   }
 
   render() {
-    const { tileDeck, muted, gameOver } = this.state;
+    const { tileDeck, music, sfx, gameOver } = this.state;
     const score = this.formatScore(this.state.score)
 
       return (
         <div id="container" className="container">
           <div id="audio-controls">
-            <div id="sound-on-off">
-                {
-                  muted ? (
-                    <img onClick={ () => this.setState({ muted: false }) } className="audio-control" src={ soundoff } alt="soundoff"/>
-                  ) : (
-                    <img onClick={ () => this.setState({ muted: true }) } className="audio-control" src={ soundon } alt="soundon"/>
-                  )
-                }
+            <div id="sfx-on-off" className="audio-control-wrapper" onClick={ () => this.toggleAudio('sfx') }>
+              <img src={ soundon } alt="sfx"/>
+              { !sfx && <img className="no-sign" src={ nosign } alt="off" /> }
+            </div>
+            <div id="sound-on-off" className="audio-control-wrapper" onClick={ () => this.toggleAudio('music') }>
+              <img src={ musicon } alt="music"/>
+              { !music && <img className="no-sign" src={ nosign } alt="off" /> }
             </div>
           </div>
-          <audio id="audio-player" autoPlay loop muted={ muted } onCanPlay={ this.playAudio }>
+          <audio id="audio-player" preload="auto" autoPlay loop muted={ !music } onCanPlay={ this.playAudio }>
             <source src={ mario64castle } type="audio/mpeg"/>
+          </audio>
+          <audio>
+
           </audio>
           <header>
             <h1 className="header">superTileMatch</h1>
@@ -164,7 +169,9 @@ class App extends Component {
 
           {
             gameOver ? (
-              <GameOver/>
+              <GameOver 
+              score={ score }
+              />
             ) : (
               <div className="grid-section">
                 <Grid 
