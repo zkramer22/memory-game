@@ -11,7 +11,7 @@ import mario64castle from './audio/mario64castle.mp3';
 import ztk from './img/ztk.png';
 import musicon from './img/music.png';
 import nosign from './img/nosign.png';
-import soundon from './img/soundon.png';
+import sfxon from './img/sfx.png';
 
 class App extends Component {
   constructor(props) {
@@ -27,18 +27,18 @@ class App extends Component {
       misses: 0,
       tiles: TILES,
       tileDeck: buildDeck(TILES),
-      timer: 9,
+      timer: 1,
       countdown: null,
       gameOver: false,
     };
     this.updateMatches = this.updateMatches.bind(this);
     this.updateMisses = this.updateMisses.bind(this);
     this.formatScore = this.formatScore.bind(this);
+    this.playAgain = this.playAgain.bind(this);
   }
 
   componentDidMount() {
     setTimeout(() => this.showTiles(true), 500)
-    console.log('loadin');
     this.state.coin.load()
     this.state.mariohoo.load()
     this.state.bullet.load()
@@ -47,7 +47,7 @@ class App extends Component {
   restartTimer() {
     this.stopTimer();
     this.setState({ timer: 9 });
-    this.countDown();
+    setTimeout(() => this.countDown(), 1500)
   }
   tickTimer() {
     if (this.state.timer > 1) {
@@ -64,28 +64,30 @@ class App extends Component {
   updateMatches() {
     const score = document.getElementById('score');
     this.playSound('mariohoo', 'sfx', 200)
+    this.flashColor(score, 'lightgreen');
+    this.setState({ 
+      matches: this.state.matches + 1, 
+      score: this.state.score + (100 * this.state.timer) 
+    });
+    this.restartTimer();
     setTimeout(() => {
-      this.flashColor(score, 'lightgreen');
-      this.setState({ 
-        matches: this.state.matches + 1, 
-        score: this.state.score + (100 * this.state.timer) 
-      });
       this.playSound('coin', 'sfx', 1)
-      this.restartTimer();
       if (this.state.matches === 8) {
         this.endGame();
         this.stopTimer();
       }
-    }, 2750)
+    }, 3000)
   }
   updateMisses() {
     const score = document.getElementById('score');
     this.playSound('bullet', 'sfx', 200)
-    this.flashColor(score, 'red');
     this.setState({ 
       misses: this.state.misses + 1, 
-      score: this.state.score - 25 
     });
+    if (this.state.misses >= 5) {
+      this.flashColor(score, 'red');
+      this.setState({ score: this.state.score - 25})
+    }
     this.stopTimer();
     this.countDown();
   }
@@ -135,6 +137,14 @@ class App extends Component {
     setTimeout(() => this.setState({ gameOver: true }), 3000);
   }
 
+  playAgain() {
+    this.setState({ 
+      tileDeck: buildDeck(TILES),
+      gameOver: false,
+    })
+    setTimeout(() => this.showTiles(true), 1000)
+  }
+
   render() {
     const { tileDeck, music, sfx, gameOver } = this.state;
     const score = this.formatScore(this.state.score)
@@ -143,7 +153,7 @@ class App extends Component {
         <div id="container" className="container">
           <div id="audio-controls">
             <div id="sfx-on-off" className="audio-control-wrapper" onClick={ () => this.toggleAudio('sfx') }>
-              <img src={ soundon } alt="sfx"/>
+              <img src={ sfxon } alt="sfx"/>
               { !sfx && <img className="no-sign" src={ nosign } alt="off" /> }
             </div>
             <div id="sound-on-off" className="audio-control-wrapper" onClick={ () => this.toggleAudio('music') }>
@@ -169,9 +179,7 @@ class App extends Component {
 
           {
             gameOver ? (
-              <GameOver 
-              score={ score }
-              />
+              <GameOver score={ score } formatScore={this.formatScore} playAgain={ this.playAgain }/>
             ) : (
               <div className="grid-section">
                 <Grid 
