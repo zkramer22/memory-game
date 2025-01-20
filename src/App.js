@@ -207,7 +207,7 @@ class App extends Component {
           </div>
 
           <div className="links ratio-16-9-hide">
-            <a id="link" href="ztkweb.com" target="_blank" rel="noreferrer">
+            <a id="link" href="https://ztkweb.com" target="_blank" rel="noreferrer">
               <div className="link-img-wrapper" id="ztk">
                 <img src={ztk} alt="ztk-logo"/>
               </div>
