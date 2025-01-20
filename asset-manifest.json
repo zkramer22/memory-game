@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/memory-game/static/css/main.d1579eef.css",
+    "main.js": "/memory-game/static/js/main.1274a8bf.js",
+    "static/media/mario64castle.mp3": "/memory-game/static/media/mario64castle.b6a0b333ee0ea998e518.mp3",
+    "static/media/starman.png": "/memory-game/static/media/starman.cc7e1e6a05b613c5ff76.png",
+    "static/media/iceflower.png": "/memory-game/static/media/iceflower.40f9a21624ab83a2afd2.png",
+    "static/media/piranha.png": "/memory-game/static/media/piranha.8ec929073d475641b7d1.png",
+    "static/media/mushroom.png": "/memory-game/static/media/mushroom.355c684bc44e6683b7c1.png",
+    "static/media/coin.mp3": "/memory-game/static/media/coin.fe0aab414d84485ec801.mp3",
+    "static/media/bullet.mp3": "/memory-game/static/media/bullet.ef77fa710555db4843d4.mp3",
+    "static/media/mariohoo.mp3": "/memory-game/static/media/mariohoo.942572bb6c37b850212f.mp3",
+    "static/media/capefeather.png": "/memory-game/static/media/capefeather.532bee91c16ff1a731f9.png",
+    "index.html": "/memory-game/index.html",
+    "main.d1579eef.css.map": "/memory-game/static/css/main.d1579eef.css.map",
+    "main.1274a8bf.js.map": "/memory-game/static/js/main.1274a8bf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d1579eef.css",
+    "static/js/main.1274a8bf.js"
+  ]
+}
