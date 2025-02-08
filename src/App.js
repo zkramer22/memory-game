@@ -25,7 +25,6 @@ class App extends Component {
       score: 0,
       matches: 0,
       misses: 0,
-      tiles: TILES,
       tileDeck: buildDeck(TILES),
       timer: 1,
       countdown: null,
@@ -139,7 +138,12 @@ class App extends Component {
 
   playAgain() {
     this.setState({ 
+      score: 0,
+      matches: 0,
+      misses: 0,
       tileDeck: buildDeck(TILES),
+      timer: 1,
+      countdown: null,
       gameOver: false,
     })
     setTimeout(() => this.showTiles(true), 1000)
